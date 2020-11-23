@@ -145,13 +145,14 @@ public class Form01 extends JFrame {
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				
 			}
 		});
 		btnEliminar.setBounds(323, 113, 89, 23);
 		panel.add(btnEliminar);
 		
 		//actualiza la tabla.
-		//actualizarTabla();
+		actualizarTabla();
 		
 		
 	}//end constructor
@@ -179,8 +180,9 @@ public class Form01 extends JFrame {
 		
 		
 		DefaultTableModel modelo = new DefaultTableModel();
-		modelo.setColumnIdentifiers(this.columnNames);		
-		table.setModel(modelo);		
+		modelo.setColumnIdentifiers(columnNames);
+		table.setModel(modelo);
+		
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);
 		table.getColumnModel().getColumn(0).setMinWidth(50);
 		table.getColumnModel().getColumn(1).setMinWidth(75);
@@ -188,28 +190,14 @@ public class Form01 extends JFrame {
 		table.getColumnModel().getColumn(2).setMinWidth(100);
 		table.getColumnModel().getColumn(3).setPreferredWidth(50);
 		table.getColumnModel().getColumn(3).setMinWidth(50);
-		table.setModel(modelo);
-		for (Integer i = 0; i < 10; i++) {
-        	//indice = (Integer) i;
-            String mensaje = i + " producto";
-
-            // Creamos un nuevo renglon para la tabla
-//            String[] datos = {(String)datosAux[i][0] , (String)datosAux[i][1],
-//            		string};
-            String[] datos = {i.toString(),"hola","estas","uno"};
-            
-//            		string};
-            // Agregamos los datos a la tabla
-            modelo.addRow(datos);
-        }
 		
 		
-		/*table.setModel(new DefaultTableModel(
+		table.setModel(new DefaultTableModel(
 				new Object[][] {
 				},
 				new String[] {
 					"Id", "Nombre", "Apellido", "Edad"
 				}
-			));*/
+			));
 	}
 }
