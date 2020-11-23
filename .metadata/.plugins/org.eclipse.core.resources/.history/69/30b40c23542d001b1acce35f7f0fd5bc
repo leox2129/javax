@@ -53,7 +53,7 @@ public class Form01 extends JFrame {
 	 */
 	public Form01() {
 		//inicializo el arreglo de personas
-//		listaPersonas = new ArrayList<Persona>();
+		listaPersonas = new ArrayList<Persona>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1027, 318);
@@ -190,10 +190,9 @@ public class Form01 extends JFrame {
 		table.getColumnModel().getColumn(3).setMinWidth(50);
 		table.setModel(modelo);
 		
-		for (Integer i = 0; i<largo ; i++) {
+		for (Integer i = 0; largo < 10; i++) {
         	//indice = (Integer) i;
             String mensaje = i + " producto";
-            listaPersonas
 
             // Creamos un nuevo renglon para la tabla
 //            String[] datos = {(String)datosAux[i][0] , (String)datosAux[i][1],
