@@ -123,7 +123,6 @@ public class Form01 extends JFrame {
 				} catch (NumberFormatException e) {					
 					// TODO: handle exception
 //					error de convertir 
-					
 			
 				} catch (Exception e) {
 					// TODO: handle exception

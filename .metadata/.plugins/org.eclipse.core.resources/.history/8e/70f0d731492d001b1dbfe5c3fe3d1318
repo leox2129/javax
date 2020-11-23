@@ -29,8 +29,6 @@ public class Form01 extends JFrame {
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtEdad;
-	String[] columnNames = new String[] {
-			"Id", "Nombre", "Apellido", "Edad"};
 
 	/**
 	 * Launch the application.
@@ -52,9 +50,6 @@ public class Form01 extends JFrame {
 	 * Create the frame.
 	 */
 	public Form01() {
-		//inicializo el arreglo de personas
-		listaPersonas = new ArrayList<Persona>();
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1027, 318);
 		contentPane = new JPanel();
@@ -69,8 +64,13 @@ public class Form01 extends JFrame {
 		
 		table = new JTable();
 		
-		
-		
+		table.getColumnModel().getColumn(0).setPreferredWidth(50);
+		table.getColumnModel().getColumn(0).setMinWidth(50);
+		table.getColumnModel().getColumn(1).setMinWidth(75);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setMinWidth(100);
+		table.getColumnModel().getColumn(3).setPreferredWidth(50);
+		table.getColumnModel().getColumn(3).setMinWidth(50);
 		scrollPane.setViewportView(table);
 		
 		JPanel panel = new JPanel();
@@ -111,25 +111,14 @@ public class Form01 extends JFrame {
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//programas el agregar persona a ArrayList	
-				try {
-					String nombreStr = txtNombre.getText();
-					String apellidoStr = txtApellido.getText();
-					String edadStr = txtEdad.getText();
-					int edadInt = Integer.parseInt(edadStr);
-					Persona persona= new Persona(nombreStr, apellidoStr, edadInt);
-					listaPersonas.add(persona);
-					actualizarTabla();					
-				} catch (NumberFormatException e) {					
-					// TODO: handle exception
-//					error de convertir 
-					
-			
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				
-				
+				//programas el agregar persona a ArrayList				
+				String nombreStr = txtNombre.getText();
+				String apellidoStr = txtApellido.getText();
+				String edadStr = txtEdad.getText();
+				int edadInt = Integer.parseInt(edadStr);
+				Persona persona= new Persona(nombreStr, apellidoStr, edadInt);
+				listaPersonas.add(persona);
+				actualizarTabla();
 			}
 
 			
@@ -150,46 +139,11 @@ public class Form01 extends JFrame {
 		});
 		btnEliminar.setBounds(323, 113, 89, 23);
 		panel.add(btnEliminar);
-		
-		//actualiza la tabla.
-		actualizarTabla();
-		
-		
 	}//end constructor
 	
 	
 	private void actualizarTabla() {
-		// TODO Auto-generated method stu
-		
-		int largo = listaPersonas.size();
-		//cantidad de columnas de la laprimera fila 0, salida: 2 
-		//int largo = datosAux[0].length;
-        /*for (Integer i = 0; i < largo; i++) {
-        	indice = (Integer) i;
-            String mensaje = i + " producto";
-
-            // Creamos un nuevo renglon para la tabla
-            String[] datos = {(String)datosAux[i][0] , (String)datosAux[i][1] };
-            // Agregamos los datos a la tabla
-            modelo.addRow(datos);
-        }*/
-		
-		
-//		String[]  = new String[] {"ID", "Name"};
-		
-		
-		
-		DefaultTableModel modelo = new DefaultTableModel();
-		modelo.setColumnIdentifiers(columnNames);
-		table.setModel(modelo);
-		
-		table.getColumnModel().getColumn(0).setPreferredWidth(50);
-		table.getColumnModel().getColumn(0).setMinWidth(50);
-		table.getColumnModel().getColumn(1).setMinWidth(75);
-		table.getColumnModel().getColumn(2).setPreferredWidth(100);
-		table.getColumnModel().getColumn(2).setMinWidth(100);
-		table.getColumnModel().getColumn(3).setPreferredWidth(50);
-		table.getColumnModel().getColumn(3).setMinWidth(50);
+		// TODO Auto-generated method stub
 		
 		
 		table.setModel(new DefaultTableModel(

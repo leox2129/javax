@@ -120,15 +120,10 @@ public class Form01 extends JFrame {
 					Persona persona= new Persona(nombreStr, apellidoStr, edadInt);
 					listaPersonas.add(persona);
 					actualizarTabla();					
-				} catch (NumberFormatException e) {					
+				} catch (Exception e) {					
 					// TODO: handle exception
-//					error de convertir 
-					
-			
-				} catch (Exception e) {
-					// TODO: handle exception
+					e.printStackTrace();
 				}
-				
 				
 			}
 

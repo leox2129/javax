@@ -29,8 +29,6 @@ public class Form01 extends JFrame {
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtEdad;
-	String[] columnNames = new String[] {
-			"Id", "Nombre", "Apellido", "Edad"};
 
 	/**
 	 * Launch the application.
@@ -52,9 +50,6 @@ public class Form01 extends JFrame {
 	 * Create the frame.
 	 */
 	public Form01() {
-		//inicializo el arreglo de personas
-		listaPersonas = new ArrayList<Persona>();
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1027, 318);
 		contentPane = new JPanel();
@@ -68,7 +63,6 @@ public class Form01 extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
-		
 		
 		
 		scrollPane.setViewportView(table);
@@ -111,25 +105,14 @@ public class Form01 extends JFrame {
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//programas el agregar persona a ArrayList	
-				try {
-					String nombreStr = txtNombre.getText();
-					String apellidoStr = txtApellido.getText();
-					String edadStr = txtEdad.getText();
-					int edadInt = Integer.parseInt(edadStr);
-					Persona persona= new Persona(nombreStr, apellidoStr, edadInt);
-					listaPersonas.add(persona);
-					actualizarTabla();					
-				} catch (NumberFormatException e) {					
-					// TODO: handle exception
-//					error de convertir 
-					
-			
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				
-				
+				//programas el agregar persona a ArrayList				
+				String nombreStr = txtNombre.getText();
+				String apellidoStr = txtApellido.getText();
+				String edadStr = txtEdad.getText();
+				int edadInt = Integer.parseInt(edadStr);
+				Persona persona= new Persona(nombreStr, apellidoStr, edadInt);
+				listaPersonas.add(persona);
+				actualizarTabla();
 			}
 
 			
@@ -150,11 +133,6 @@ public class Form01 extends JFrame {
 		});
 		btnEliminar.setBounds(323, 113, 89, 23);
 		panel.add(btnEliminar);
-		
-		//actualiza la tabla.
-		actualizarTabla();
-		
-		
 	}//end constructor
 	
 	
@@ -177,7 +155,8 @@ public class Form01 extends JFrame {
 		
 //		String[]  = new String[] {"ID", "Name"};
 		
-		
+		String[] columnNames = new String[] {
+				"Id", "Nombre", "Apellido", "Edad"};
 		
 		DefaultTableModel modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(columnNames);
