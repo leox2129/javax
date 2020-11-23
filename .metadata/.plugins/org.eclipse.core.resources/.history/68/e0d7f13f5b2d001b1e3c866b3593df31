@@ -190,7 +190,7 @@ public class Form01 extends JFrame {
 		table.getColumnModel().getColumn(3).setMinWidth(50);
 		table.setModel(modelo);
 		
-		for (int i = 0; i<largo ; i++) {
+		for (Integer i = 0; i<largo ; i++) {
         	//indice = (Integer) i;
             String mensaje = i + " producto";
 //            listaPersonas
@@ -198,24 +198,7 @@ public class Form01 extends JFrame {
             // Creamos un nuevo renglon para la tabla
 //            String[] datos = {(String)datosAux[i][0] , (String)datosAux[i][1],
 //            		string};
-            
-            
-           //obtenemos la persona de la posicion 
-           //i en el ArrayList personas.
-           Persona persona = listaPersonas.get(i);
-           //Persona(nombreStr, apellidoStr, edadInt)
-           
-
-           int idInt=persona.getId();
-       	   String nombreStr= persona.getNombre();
-       	   String apellidoStr=persona.getApellido();
-       	   int edadInt=persona.getEdad();
-           String idStr = String.valueOf(idInt);
-           String edadStr= String.valueOf(edadInt);
-       	   
-//           "Id", "Nombre", "Apellido", "Edad"};
-           
-           String[] datos = { idStr,nombreStr ,apellidoStr,edadStr};
+            String[] datos = {i.toString(),"hola","estas","uno"};
             
 //            		string};
             // Agregamos los datos a la tabla
