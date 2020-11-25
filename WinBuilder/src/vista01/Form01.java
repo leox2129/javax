@@ -16,13 +16,21 @@ import modelo.Persona;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
+enum modo {
+	  EDIT,
+	  NORMAL
+	}
+
 public class Form01 extends JFrame {
 	//private A
+	private modo modoForm;
+	private int filaSel;
 	private static ArrayList<Persona> listaPersonas =new ArrayList<Persona>();
 	private JPanel contentPane;
 	private JTable table;
@@ -52,11 +60,13 @@ public class Form01 extends JFrame {
 	 * Create the frame.
 	 */
 	public Form01() {
+		this.filaSel = -1;
+		modoForm = modoForm.NORMAL;
 		//inicializo el arreglo de personas
 //		listaPersonas = new ArrayList<Persona>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1027, 318);
+		setBounds(100, 100, 1027, 351);
 		contentPane = new JPanel();
 		contentPane.setToolTipText("hola");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,7 +78,7 @@ public class Form01 extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
-		
+		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		
 		
 		scrollPane.setViewportView(table);
@@ -76,7 +86,7 @@ public class Form01 extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Agregar Persona", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		panel.setToolTipText("Hola");
-		panel.setBounds(428, 28, 573, 212);
+		panel.setBounds(428, 44, 573, 212);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -138,6 +148,37 @@ public class Form01 extends JFrame {
 		panel.add(btnAgregar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//programar edicion				
+				try {
+					filaSel = table.getSelectedRow();
+					Persona persona = listaPersonas.get(filaSel);					
+					txtApellido.setText(persona.getApellido());
+					txtNombre.setText(persona.getNombre());				
+					txtEdad.setText(String.valueOf(persona.getEdad()));
+					modoForm = modo.EDIT;
+					btnEditar.setText("Eitando"+persona.getId());
+					
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "seleciona fila a editar");
+				}
+								
+				
+				/*id = Integer.parseInt((String)modelo.getValueAt(table.getSelectedRow(), 0));
+				 = table.getSelectedRow();
+				int dialogResult = JOptionPane.showConfirmDialog (null, 
+						"Desea eliminar id:" + id,
+						"Warning",JOptionPane.YES_NO_OPTION);
+				if(dialogResult == JOptionPane.YES_OPTION) {				
+					modelo.removeRow(this.indiceEdit);
+					JOptionPane.showMessageDialog(null, "Exitosamente elimanda");
+				}*/
+				
+			}
+		});
 		btnEditar.setBounds(323, 65, 89, 23);
 		panel.add(btnEditar);
 		

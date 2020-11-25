@@ -79,7 +79,7 @@ public class WinBuilder {
 		btnAgregar.setBounds(24, 72, 267, 31);
 		frame.getContentPane().add(btnAgregar);
 		
-		table = new JTable();
+		table = new JTable();		
 		table.setBounds(272, 244, -175, -109);
 		frame.getContentPane().add(table);
 		
