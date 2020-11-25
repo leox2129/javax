@@ -18,18 +18,16 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import enumerado.*;
 
-enum modo {
-	  EDIT,
-	  NORMAL
-	}
-
-public class Form01 extends JFrame {
+public class Form01 extends JDialog {
 	//private A
-	private modo modoForm;
+	private Modo modoForm;
 	private int filaSel;
 	private static ArrayList<Persona> listaPersonas =new ArrayList<Persona>();
 	private JPanel contentPane;
@@ -157,7 +155,7 @@ public class Form01 extends JFrame {
 					txtApellido.setText(persona.getApellido());
 					txtNombre.setText(persona.getNombre());				
 					txtEdad.setText(String.valueOf(persona.getEdad()));
-					modoForm = modo.EDIT;
+					modoForm = Modo.EDIT;
 					btnEditar.setText("Eitando"+persona.getId());
 					
 					
