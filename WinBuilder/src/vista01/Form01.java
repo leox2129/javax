@@ -29,6 +29,7 @@ public class Form01 extends JFrame {
 	//private A
 	private Modo modoForm;
 	private int filaSel;
+	private int idPersonaEd;
 	private static ArrayList<Persona> listaPersonas =new ArrayList<Persona>();
 	private JPanel contentPane;
 	private JTable table;
@@ -130,8 +131,7 @@ public class Form01 extends JFrame {
 					actualizarTabla();					
 				} catch (NumberFormatException e) {					
 					// TODO: handle exception
-//					error de convertir 
-					
+//					error de convertir 					
 			
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -151,15 +151,16 @@ public class Form01 extends JFrame {
 				//programar edicion				
 				try {
 					switch (modoForm) {
-					case NORMAL:
-						modoForm = Modo.EDIT;
+					case NORMAL:						
+						modoForm = Modo.EDIT;						
 						filaSel = table.getSelectedRow();
-						Persona persona = listaPersonas.get(filaSel);					
+						Persona persona = listaPersonas.get(filaSel);	
+						idPersonaEd = persona.getId();
 						txtApellido.setText(persona.getApellido());
 						txtNombre.setText(persona.getNombre());				
 						txtEdad.setText(String.valueOf(persona.getEdad()));
 						modoForm = Modo.EDIT;
-						btnEditar.setText("Eitando"+persona.getId());						
+						btnEditar.setText("Eitando: "+persona.getId());						
 						break;
 					case EDIT:
 						//remuevo a la persona
@@ -168,9 +169,10 @@ public class Form01 extends JFrame {
 						String apellidoStr = txtApellido.getText();
 						String edadStr = txtEdad.getText();
 						int edadInt = Integer.parseInt(edadStr);
-						Persona persona01= new Persona(nombreStr, apellidoStr, edadInt);
+						Persona persona01= new Persona(idPersonaEd, nombreStr, apellidoStr, edadInt);
 						listaPersonas.add(filaSel, persona01);
-						actualizarTabla();		
+						actualizarTabla();
+						btnEditar.setText("Editar");
 						break;
 					default:
 						break;
@@ -201,8 +203,18 @@ public class Form01 extends JFrame {
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
+			public void actionPerformed(ActionEvent arg0) {								
+				filaSel = table.getSelectedRow();
+				Persona persona = listaPersonas.get(filaSel);
+				//id = Integer.parseInt((String)modelo.getValueAt(table.getSelectedRow(), 0));				
+				int dialogResult = JOptionPane.showConfirmDialog (null, 
+						"Desea eliminar id: " + persona.getId(),
+						"Warning",JOptionPane.YES_NO_OPTION);
+				if(dialogResult == JOptionPane.YES_OPTION) {									
+					listaPersonas.remove(filaSel);
+					actualizarTabla();
+					JOptionPane.showMessageDialog(null, "Exitosamente elimanda");
+				}
 			}
 		});
 		btnEliminar.setBounds(323, 113, 218, 23);
@@ -216,29 +228,16 @@ public class Form01 extends JFrame {
 	
 	
 	private void actualizarTabla() {
-		// TODO Auto-generated method stu
-		
+		// TODO Auto-generated method studio
+		//obtiene el largo del arreglo
 		int largo = listaPersonas.size();
-		//cantidad de columnas de la laprimera fila 0, salida: 2 
-		//int largo = datosAux[0].length;
-        /*for (Integer i = 0; i < largo; i++) {
-        	indice = (Integer) i;
-            String mensaje = i + " producto";
-
-            // Creamos un nuevo renglon para la tabla
-            String[] datos = {(String)datosAux[i][0] , (String)datosAux[i][1] };
-            // Agregamos los datos a la tabla
-            modelo.addRow(datos);
-        }*/
-		
-		
-//		String[]  = new String[] {"ID", "Name"};
-		
-		
-		
+		//contine los datos para agregar a la tabla
 		DefaultTableModel modelo = new DefaultTableModel();
-		modelo.setColumnIdentifiers(this.columnNames);		
+		//asigna las columnas, los cabezales
+		modelo.setColumnIdentifiers(this.columnNames);
+		//setea el modelo a la tabla
 		table.setModel(modelo);		
+		//estilo
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);
 		table.getColumnModel().getColumn(0).setMinWidth(50);
 		table.getColumnModel().getColumn(1).setMinWidth(75);
@@ -246,47 +245,24 @@ public class Form01 extends JFrame {
 		table.getColumnModel().getColumn(2).setMinWidth(100);
 		table.getColumnModel().getColumn(3).setPreferredWidth(50);
 		table.getColumnModel().getColumn(3).setMinWidth(50);
-		table.setModel(modelo);
-		
+		table.setModel(modelo);		
 		for (int i = 0; i<largo ; i++) {
         	//indice = (Integer) i;
             String mensaje = i + " producto";
-//            listaPersonas
-
-            // Creamos un nuevo renglon para la tabla
-//            String[] datos = {(String)datosAux[i][0] , (String)datosAux[i][1],
-//            		string};
-            
-            
            //obtenemos la persona de la posicion 
            //i en el ArrayList personas.
            Persona persona = listaPersonas.get(i);
-           //Persona(nombreStr, apellidoStr, edadInt)
-           
-
+           //Persona(nombreStr, apellidoStr, edadInt)          
            int idInt=persona.getId();
        	   String nombreStr= persona.getNombre();
        	   String apellidoStr=persona.getApellido();
        	   int edadInt=persona.getEdad();
            String idStr = String.valueOf(idInt);
-           String edadStr= String.valueOf(edadInt);
-       	   
-//           "Id", "Nombre", "Apellido", "Edad"};
-           
-           String[] datos = { idStr,nombreStr ,apellidoStr,edadStr};
-            
-//            		string};
+           String edadStr= String.valueOf(edadInt);       	   
+//           "Id", "Nombre", "Apellido", "Edad"};           
+           String[] datos = { idStr,nombreStr ,apellidoStr,edadStr};                      	
             // Agregamos los datos a la tabla
             modelo.addRow(datos);
-        }
-		
-		
-		/*table.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"Id", "Nombre", "Apellido", "Edad"
-				}
-			));*/
+        }		
 	}
 }

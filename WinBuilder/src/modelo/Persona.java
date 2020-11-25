@@ -21,9 +21,22 @@ public class Persona {
 		this.edad = edad;		
 	}
 	
+
+//	alt + shift+s 
+	
+	
 	public Persona() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public Persona(int id, String nombre, String apellido, int edad) {
+		super();//no es necesario
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+	}
+
 
 	public int getId() {
 		return id;
