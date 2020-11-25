@@ -169,7 +169,7 @@ public class Form01 extends JFrame {
 						String edadStr = txtEdad.getText();
 						int edadInt = Integer.parseInt(edadStr);
 						Persona persona01= new Persona(nombreStr, apellidoStr, edadInt);
-						listaPersonas.add(filaSel, persona01);
+						listaPersonas.add(filaSel, persona);
 						actualizarTabla();		
 						break;
 					default:

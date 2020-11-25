@@ -151,7 +151,7 @@ public class Form01 extends JFrame {
 				//programar edicion				
 				try {
 					switch (modoForm) {
-					case NORMAL:
+					case EDIT:
 						modoForm = Modo.EDIT;
 						filaSel = table.getSelectedRow();
 						Persona persona = listaPersonas.get(filaSel);					
@@ -161,17 +161,7 @@ public class Form01 extends JFrame {
 						modoForm = Modo.EDIT;
 						btnEditar.setText("Eitando"+persona.getId());						
 						break;
-					case EDIT:
-						//remuevo a la persona
-						listaPersonas.remove(filaSel);						
-						String nombreStr = txtNombre.getText();
-						String apellidoStr = txtApellido.getText();
-						String edadStr = txtEdad.getText();
-						int edadInt = Integer.parseInt(edadStr);
-						Persona persona01= new Persona(nombreStr, apellidoStr, edadInt);
-						listaPersonas.add(filaSel, persona01);
-						actualizarTabla();		
-						break;
+					case NORMAL:
 					default:
 						break;
 					}

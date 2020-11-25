@@ -162,16 +162,6 @@ public class Form01 extends JFrame {
 						btnEditar.setText("Eitando"+persona.getId());						
 						break;
 					case EDIT:
-						//remuevo a la persona
-						listaPersonas.remove(filaSel);						
-						String nombreStr = txtNombre.getText();
-						String apellidoStr = txtApellido.getText();
-						String edadStr = txtEdad.getText();
-						int edadInt = Integer.parseInt(edadStr);
-						Persona persona01= new Persona(nombreStr, apellidoStr, edadInt);
-						listaPersonas.add(filaSel, persona01);
-						actualizarTabla();		
-						break;
 					default:
 						break;
 					}

@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import enumerado.*;
 //using
 import modelo.Persona;
 
@@ -18,16 +19,17 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import javax.swing.JDialog;
-
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import enumerado.*;
 
-public class Form01 extends JFrame {
+
+public class FormularioTabla extends JFrame {
+	
+	
+
 	//private A
-	private Modo modoForm;
+	private enumerado.Modo modoForm;
 	private int filaSel;
 	private static ArrayList<Persona> listaPersonas =new ArrayList<Persona>();
 	private JPanel contentPane;
@@ -45,7 +47,7 @@ public class Form01 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Form01 frame = new Form01();
+					FormularioTabla frame = new FormularioTabla();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,9 +59,10 @@ public class Form01 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Form01() {
+	public FormularioTabla() {
 		this.filaSel = -1;
-		modoForm = modoForm.NORMAL;
+		
+		modoForm = Modo.NORMAL;
 		//inicializo el arreglo de personas
 //		listaPersonas = new ArrayList<Persona>();
 		
@@ -142,7 +145,7 @@ public class Form01 extends JFrame {
 
 			
 		});
-		btnAgregar.setBounds(323, 23, 218, 23);
+		btnAgregar.setBounds(323, 23, 89, 23);
 		panel.add(btnAgregar);
 		
 		JButton btnEditar = new JButton("Editar");
@@ -152,32 +155,33 @@ public class Form01 extends JFrame {
 				try {
 					switch (modoForm) {
 					case NORMAL:
-						modoForm = Modo.EDIT;
+						modoForm= Modo.EDIT;
 						filaSel = table.getSelectedRow();
 						Persona persona = listaPersonas.get(filaSel);					
 						txtApellido.setText(persona.getApellido());
 						txtNombre.setText(persona.getNombre());				
 						txtEdad.setText(String.valueOf(persona.getEdad()));
 						modoForm = Modo.EDIT;
-						btnEditar.setText("Eitando"+persona.getId());						
+						btnEditar.setText("Editando:  "+persona.getId());
 						break;
 					case EDIT:
-						//remuevo a la persona
-						listaPersonas.remove(filaSel);						
-						String nombreStr = txtNombre.getText();
-						String apellidoStr = txtApellido.getText();
-						String edadStr = txtEdad.getText();
-						int edadInt = Integer.parseInt(edadStr);
-						Persona persona01= new Persona(nombreStr, apellidoStr, edadInt);
-						listaPersonas.add(filaSel, persona01);
-						actualizarTabla();		
-						break;
+						modoForm= Modo.NORMAL;
+						btnEditar.setText("Editar");
+						//modoficar el array lista de perosnas						
+						//llamar al metodo actulizar
+						listaPersonas.remove(filaSel);
+						
+					
+						
+						
 					default:
 						break;
 					}
 					
 					
 					
+					
+										
 				} catch (Exception e) {
 					// TODO: handle exception
 					JOptionPane.showMessageDialog(null, "seleciona fila a editar");
@@ -196,7 +200,7 @@ public class Form01 extends JFrame {
 				
 			}
 		});
-		btnEditar.setBounds(323, 65, 218, 23);
+		btnEditar.setBounds(323, 65, 89, 23);
 		panel.add(btnEditar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
@@ -205,7 +209,7 @@ public class Form01 extends JFrame {
 				
 			}
 		});
-		btnEliminar.setBounds(323, 113, 218, 23);
+		btnEliminar.setBounds(323, 113, 89, 23);
 		panel.add(btnEliminar);
 		
 		//actualiza la tabla.

@@ -145,7 +145,7 @@ public class FormularioTabla extends JFrame {
 
 			
 		});
-		btnAgregar.setBounds(323, 23, 89, 23);
+		btnAgregar.setBounds(323, 23, 163, 23);
 		panel.add(btnAgregar);
 		
 		JButton btnEditar = new JButton("Editar");
@@ -200,7 +200,7 @@ public class FormularioTabla extends JFrame {
 				
 			}
 		});
-		btnEditar.setBounds(323, 65, 89, 23);
+		btnEditar.setBounds(323, 65, 163, 23);
 		panel.add(btnEditar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
@@ -209,7 +209,7 @@ public class FormularioTabla extends JFrame {
 				
 			}
 		});
-		btnEliminar.setBounds(323, 113, 89, 23);
+		btnEliminar.setBounds(323, 113, 163, 23);
 		panel.add(btnEliminar);
 		
 		//actualiza la tabla.
